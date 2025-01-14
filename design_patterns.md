@@ -255,7 +255,7 @@ classDiagram
     Controller --> View : updates
     View ..> Model : reads
 ```
-
+![alt text](image.png)
 ---
 
 ## Summary
