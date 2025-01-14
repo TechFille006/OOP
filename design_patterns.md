@@ -31,7 +31,7 @@ classDiagram
     PaymentStrategy <|.. CreditCardPayment
     PaymentStrategy <|.. PayPalPayment
     PaymentStrategy <|.. CashPayment
-    PaymentContext o-- PaymentStrategy
+    PaymentContext --> PaymentStrategy
 ```
 
 ## 2. Factory Method Pattern
@@ -67,6 +67,8 @@ classDiagram
     Restaurant <|-- ChineseRestaurant
     Dish <|.. Pizza
     Dish <|.. NoodleDish
+    ItalianRestaurant ..> Pizza
+    ChineseRestaurant ..> NoodleDish
 ```
 
 ## 3. Abstract Factory Pattern
@@ -104,6 +106,12 @@ classDiagram
     }
     FurnitureFactory <|.. ModernFurnitureFactory
     FurnitureFactory <|.. VintageFurnitureFactory
+    ModernFurnitureFactory ..> Chair
+    ModernFurnitureFactory ..> Table
+    ModernFurnitureFactory ..> Sofa
+    VintageFurnitureFactory ..> Chair
+    VintageFurnitureFactory ..> Table
+    VintageFurnitureFactory ..> Sofa
 ```
 
 ## 4. Façade Pattern
@@ -133,9 +141,9 @@ classDiagram
         +initializeSystems()
         +shutdown()
     }
-    CarFacade --> Engine
-    CarFacade --> FuelSystem
-    CarFacade --> ElectricalSystem
+    CarFacade *-- Engine
+    CarFacade *-- FuelSystem
+    CarFacade *-- ElectricalSystem
 ```
 
 ## 5. Decorator Pattern
@@ -173,6 +181,7 @@ classDiagram
     Coffee <|.. CoffeeDecorator
     CoffeeDecorator <|-- ExtraShotDecorator
     CoffeeDecorator <|-- MilkDecorator
+    CoffeeDecorator o-- Coffee
 ```
 
 ## 6. Singleton Pattern
@@ -217,7 +226,7 @@ classDiagram
     }
     Subject <|-- Celebrity
     Observer <|.. Follower
-    Celebrity --> Observer
+    Celebrity o--> Observer
 ```
 
 ## 8. Model-View-Controller (MVC)
