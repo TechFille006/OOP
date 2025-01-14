@@ -28,10 +28,10 @@ classDiagram
     class CashPayment {
         +pay()
     }
-    PaymentStrategy <|.. CreditCardPayment
-    PaymentStrategy <|.. PayPalPayment
-    PaymentStrategy <|.. CashPayment
-    PaymentContext --> PaymentStrategy
+    PaymentStrategy <|.. CreditCardPayment : implements
+    PaymentStrategy <|.. PayPalPayment : implements
+    PaymentStrategy <|.. CashPayment : implements
+    PaymentContext o--> PaymentStrategy : has
 ```
 
 ## 2. Factory Method Pattern
@@ -63,12 +63,12 @@ classDiagram
     class NoodleDish {
         +prepare()
     }
-    Restaurant <|-- ItalianRestaurant
-    Restaurant <|-- ChineseRestaurant
-    Dish <|.. Pizza
-    Dish <|.. NoodleDish
-    ItalianRestaurant ..> Pizza
-    ChineseRestaurant ..> NoodleDish
+    Restaurant <|-- ItalianRestaurant : extends
+    Restaurant <|-- ChineseRestaurant : extends
+    Dish <|.. Pizza : implements
+    Dish <|.. NoodleDish : implements
+    ItalianRestaurant ..> Pizza : creates
+    ChineseRestaurant ..> NoodleDish : creates
 ```
 
 ## 3. Abstract Factory Pattern
@@ -104,14 +104,14 @@ classDiagram
     class Sofa {
         <<interface>>
     }
-    FurnitureFactory <|.. ModernFurnitureFactory
-    FurnitureFactory <|.. VintageFurnitureFactory
-    ModernFurnitureFactory ..> Chair
-    ModernFurnitureFactory ..> Table
-    ModernFurnitureFactory ..> Sofa
-    VintageFurnitureFactory ..> Chair
-    VintageFurnitureFactory ..> Table
-    VintageFurnitureFactory ..> Sofa
+    FurnitureFactory <|.. ModernFurnitureFactory : implements
+    FurnitureFactory <|.. VintageFurnitureFactory : implements
+    ModernFurnitureFactory ..> Chair : creates
+    ModernFurnitureFactory ..> Table : creates
+    ModernFurnitureFactory ..> Sofa : creates
+    VintageFurnitureFactory ..> Chair : creates
+    VintageFurnitureFactory ..> Table : creates
+    VintageFurnitureFactory ..> Sofa : creates
 ```
 
 ## 4. Façade Pattern
@@ -141,9 +141,9 @@ classDiagram
         +initializeSystems()
         +shutdown()
     }
-    CarFacade *-- Engine
-    CarFacade *-- FuelSystem
-    CarFacade *-- ElectricalSystem
+    CarFacade *--> Engine : contains
+    CarFacade *--> FuelSystem : contains
+    CarFacade *--> ElectricalSystem : contains
 ```
 
 ## 5. Decorator Pattern
@@ -177,11 +177,11 @@ classDiagram
         +cost()
         +description()
     }
-    Coffee <|.. BasicCoffee
-    Coffee <|.. CoffeeDecorator
-    CoffeeDecorator <|-- ExtraShotDecorator
-    CoffeeDecorator <|-- MilkDecorator
-    CoffeeDecorator o-- Coffee
+    Coffee <|.. BasicCoffee : implements
+    Coffee <|.. CoffeeDecorator : implements
+    CoffeeDecorator <|-- ExtraShotDecorator : extends
+    CoffeeDecorator <|-- MilkDecorator : extends
+    CoffeeDecorator o--> Coffee : decorates
 ```
 
 ## 6. Singleton Pattern
@@ -224,9 +224,9 @@ classDiagram
     class Follower {
         +update()
     }
-    Subject <|-- Celebrity
-    Observer <|.. Follower
-    Celebrity o--> Observer
+    Subject <|-- Celebrity : extends
+    Observer <|.. Follower : implements
+    Celebrity o--> Observer : notifies
 ```
 
 ## 8. Model-View-Controller (MVC)
@@ -251,9 +251,9 @@ classDiagram
         +updateModel()
         +refreshView()
     }
-    Controller --> Model
-    Controller --> View
-    View ..> Model
+    Controller --> Model : updates
+    Controller --> View : updates
+    View ..> Model : reads
 ```
 
 ---
